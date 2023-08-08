@@ -1,0 +1,26 @@
+@page
+@model CBTD.Pages.Categories.UpsertModel
+
+
+<h2 class="text-primary">@(Model?.ObjCategory?.Id != 0 ? "Update " : "Create ") Category</h2>
+<label asp-for="ObjCategory.Name" class="ms-2"></label>
+<input asp-for="ObjCategory.Name" class="form-control border-0 shadow"/>
+<span asp-validation-for="ObjCategory.Name" class="text-danger"></span>
+
+<label asp-for="ObjCategory.DisplayOrder" class="ms-2">Display Order</label>
+<input asp-for="ObjCategory.DisplayOrder" class="form-control border-0 shadow"/>
+<span asp-validation-for="ObjCategory.DisplayOrder" class="text-danger"></span>
+
+<div class="col">
+    <a asp-page="Index" class="btn btn-primary border  form-control">
+        @(Model?.ObjCategory?.Id != 0 ? "Update " : "Create ")
+    </a>
+    <a asp-page="Index" class="btn btn-outline-primary border  form-control">
+        Back to List
+    </a>
+</div>
+
+@if (Model.ObjCategory.Id != 0)
+{
+    <input type="hidden" asp-for="ObjCategory.Id" />
+}
