@@ -9,11 +9,13 @@ builder.Services.AddRazorPages();
 
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
+{
     options.UseMySql(
         builder.Configuration.GetConnectionString("DefaultConnection"),
-            new MySqlServerVersion(new Version(8, 1, 0))
-        )
-);
+        new MySqlServerVersion(new Version(8, 1, 0))
+    ).UseSnakeCaseNamingConvention();
+    
+});
 
 var app = builder.Build();
 
