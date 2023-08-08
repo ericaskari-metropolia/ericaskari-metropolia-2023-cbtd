@@ -1,0 +1,17 @@
+﻿version: "3.8"
+services:
+  cbtd--postgres:
+    container_name: cbtd--postgres
+    restart: 'no'
+    image: mysql:8.1
+    volumes:
+      - cbtd--mysql:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_USER: cbtd-dev
+      MYSQL_PASSWORD: cbtd-dev
+      MYSQL_DATABASE: cbtd-dev
+      MYSQL_ROOT_PASSWORD: cbtd-dev
+volumes:
+  cbtd--mysql:
