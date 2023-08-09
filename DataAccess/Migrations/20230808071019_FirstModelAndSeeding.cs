@@ -5,37 +5,41 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
 
-namespace CBTD.Migrations
+namespace DataAccess.Migrations
 {
     /// <inheritdoc />
-    public partial class ManufacturerModelAdded : Migration
+    public partial class FirstModelAndSeeding : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.AlterDatabase()
+                .Annotation("MySql:CharSet", "utf8mb4");
+
             migrationBuilder.CreateTable(
-                name: "manufacturer",
+                name: "category",
                 columns: table => new
                 {
                     id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     name = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4")
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    display_order = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_manufacturer", x => x.id);
+                    table.PrimaryKey("pk_category", x => x.id);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.InsertData(
-                table: "manufacturer",
-                columns: new[] { "id", "name" },
+                table: "category",
+                columns: new[] { "id", "display_order", "name" },
                 values: new object[,]
                 {
-                    { 1, "Manufacturer1" },
-                    { 2, "Manufacturer2" },
-                    { 3, "Manufacturer3" }
+                    { 1, 1, "Non-Alcoholic Beverages" },
+                    { 2, 2, "Wine" },
+                    { 3, 3, "Snacks" }
                 });
         }
 
@@ -43,7 +47,7 @@ namespace CBTD.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "manufacturer");
+                name: "category");
         }
     }
 }

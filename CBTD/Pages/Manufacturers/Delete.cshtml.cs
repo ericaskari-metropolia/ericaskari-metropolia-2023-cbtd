@@ -3,7 +3,6 @@ namespace CBTD.Pages.Manufacturer;
 using DataAccess.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-
 using Infrastructure.Models;
 
 public class DeleteModel : PageModel
@@ -17,22 +16,16 @@ public class DeleteModel : PageModel
     {
         _db = db;
     }
-    
+
     public IActionResult OnGet(int? id)
     {
         ObjCategory = new Manufacturer();
 
         //edit mode
-        if (id != 0)
-        {
-            ObjCategory = _db.Manufacturer.Find(id);
-        }
+        if (id != 0) ObjCategory = _db.Manufacturer.Find(id);
 
         //  Nullable because Upsert is used.
-        if (ObjCategory == null)
-        {
-            return NotFound();
-        }
+        if (ObjCategory == null) return NotFound();
 
         //create new mode
         return Page();

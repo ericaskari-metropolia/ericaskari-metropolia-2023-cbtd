@@ -16,22 +16,16 @@ public class DeleteModel : PageModel
     {
         _db = db;
     }
-    
+
     public IActionResult OnGet(int? id)
     {
         ObjCategory = new Category();
 
         //edit mode
-        if (id != 0)
-        {
-            ObjCategory = _db.Category.Find(id);
-        }
+        if (id != 0) ObjCategory = _db.Category.Find(id);
 
         //  Nullable because Upsert is used.
-        if (ObjCategory == null)
-        {
-            return NotFound();
-        }
+        if (ObjCategory == null) return NotFound();
 
         //create new mode
         return Page();

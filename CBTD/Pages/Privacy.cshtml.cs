@@ -2,7 +2,6 @@
 
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-
 public class PrivacyModel : PageModel
 {
     private readonly ILogger<PrivacyModel> _logger;
@@ -16,5 +15,3 @@ public class PrivacyModel : PageModel
     {
     }
 }
-
-

@@ -6,9 +6,9 @@
 <form method="POST">
     @if (Model.ObjCategory.Id != 0)
     {
-        <input type="hidden" asp-for="ObjCategory.Id" />
+        <input type="hidden" asp-for="ObjCategory.Id"/>
     }
-    
+
     <label asp-for="ObjCategory.Name" class="ms-2"></label>
     <input asp-for="ObjCategory.Name" class="form-control border-0 shadow"/>
     <span asp-validation-for="ObjCategory.Name" class="text-danger"></span>
@@ -26,5 +26,3 @@
         </a>
     </div>
 </form>
-
-

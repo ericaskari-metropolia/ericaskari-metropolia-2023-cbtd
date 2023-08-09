@@ -23,16 +23,10 @@ public class UpsertModel : PageModel
         ObjCategory = new Manufacturer();
 
         //edit mode
-        if (id != 0)
-        {
-            ObjCategory = _db.Manufacturer.Find(id);
-        }
+        if (id != 0) ObjCategory = _db.Manufacturer.Find(id);
 
         //  Nullable because Upsert is used.
-        if (ObjCategory == null)
-        {
-            return NotFound();
-        }
+        if (ObjCategory == null) return NotFound();
 
         //create new mode
         return Page();
@@ -40,10 +34,7 @@ public class UpsertModel : PageModel
 
     public IActionResult OnPost()
     {
-        if (!ModelState.IsValid)
-        {
-            return Page();
-        }
+        if (!ModelState.IsValid) return Page();
 
         //if this is a new category
         if (ObjCategory.Id == 0)

@@ -1,13 +1,13 @@
-
-
 ### Create Migration
+
 ```bash
-dotnet ef migrations add ManufacturerModelAdded --project CBTD --context ApplicationDbContext
+dotnet ef migrations add ManufacturerModelAdded --project DataAccess --context ApplicationDbContext
 ```
 
 ### Run Migration
+
 ```bash
-dotnet ef database update --project CBTD --context ApplicationDbContext
+dotnet ef database update --project DataAccess --context ApplicationDbContext
 ```
 
 ## Create Local SSL
@@ -20,7 +20,6 @@ dotnet ef database update --project CBTD --context ApplicationDbContext
 ```
 
 Add the root certificate to keychain and choose always trust.
-
 
 ### Generate Domain Certificate
 
