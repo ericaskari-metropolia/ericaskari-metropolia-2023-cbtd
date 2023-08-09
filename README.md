@@ -1,13 +1,13 @@
 ### Create Migration
 
 ```bash
-dotnet ef migrations add ManufacturerModelAdded --project DataAccess --context ApplicationDbContext
+dotnet ef migrations add AfterRefactoring --project DataAccess --context ApplicationDbContext --startup-project CBTD --verbose
 ```
 
 ### Run Migration
 
 ```bash
-dotnet ef database update --project DataAccess --context ApplicationDbContext
+dotnet ef database update --project DataAccess --context ApplicationDbContext --startup-project CBTD --verbose
 ```
 
 ## Create Local SSL
