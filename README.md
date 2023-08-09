@@ -1,11 +1,11 @@
 
 
-### Migration creation
+### Create Migration
 ```bash
 dotnet ef migrations add FirstModelAndSeeding --project CBTD --context ApplicationDbContext
 ```
 
-### Run migrations
+### Run Migration
 ```bash
 dotnet ef database update --project CBTD --context ApplicationDbContext
 ```
