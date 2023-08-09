@@ -2,7 +2,7 @@
 
 ### Create Migration
 ```bash
-dotnet ef migrations add FirstModelAndSeeding --project CBTD --context ApplicationDbContext
+dotnet ef migrations add ManufacturerModelAdded --project CBTD --context ApplicationDbContext
 ```
 
 ### Run Migration
