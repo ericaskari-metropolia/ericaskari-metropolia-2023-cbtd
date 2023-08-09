@@ -1,8 +1,8 @@
+namespace CBTD.Pages.Categories;
+
 using DataAccess.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-
-namespace CBTD.Pages.Categories;
 using Infrastructure.Models;
 
 public class UpsertModel : PageModel

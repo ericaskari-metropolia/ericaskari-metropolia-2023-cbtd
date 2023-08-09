@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿namespace CBTD.Pages;
+
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace CBTD.Pages;
 
 public class PrivacyModel : PageModel
 {

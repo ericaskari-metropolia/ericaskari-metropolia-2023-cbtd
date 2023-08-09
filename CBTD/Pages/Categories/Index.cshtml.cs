@@ -1,9 +1,9 @@
+namespace CBTD.Pages.Categories;
+
 using DataAccess.Data;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-
-
-namespace CBTD.Pages.Categories;
 using Infrastructure.Models;
+
 public class IndexModel : PageModel
 {
     private readonly ApplicationDbContext _db; //local instance of the database service

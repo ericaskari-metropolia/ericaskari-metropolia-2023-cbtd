@@ -1,6 +1,6 @@
-using System.ComponentModel.DataAnnotations;
-
 namespace Infrastructure.Models;
+
+using System.ComponentModel.DataAnnotations;
 
 public class Manufacturer
 {
