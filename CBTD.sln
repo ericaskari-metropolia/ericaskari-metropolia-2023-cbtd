@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CBTD.Infrastructure", "CBTD
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CBTD.DataAccess", "CBTD.DataAccess\CBTD.DataAccess.csproj", "{97D48834-EB8C-4EBD-BD33-57E7066427E2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CBTD.Utility", "CBTD.Utility\CBTD.Utility.csproj", "{08C06A96-E9E8-4C20-9AA5-D0ACA775FFD5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{97D48834-EB8C-4EBD-BD33-57E7066427E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{97D48834-EB8C-4EBD-BD33-57E7066427E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{97D48834-EB8C-4EBD-BD33-57E7066427E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{08C06A96-E9E8-4C20-9AA5-D0ACA775FFD5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{08C06A96-E9E8-4C20-9AA5-D0ACA775FFD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{08C06A96-E9E8-4C20-9AA5-D0ACA775FFD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{08C06A96-E9E8-4C20-9AA5-D0ACA775FFD5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
