@@ -1,5 +1,5 @@
 @page
-@model CBTD.Pages.Categories.UpsertModel
+@model CBTD.Pages.Manufacturer.UpsertModel
 
 
 <h2 class="text-primary">@(Model?.ObjCategory?.Id != 0 ? "Update " : "Create ") Category</h2>
@@ -12,10 +12,6 @@
     <label asp-for="ObjCategory.Name" class="ms-2"></label>
     <input asp-for="ObjCategory.Name" class="form-control border-0 shadow"/>
     <span asp-validation-for="ObjCategory.Name" class="text-danger"></span>
-
-    <label asp-for="ObjCategory.DisplayOrder" class="ms-2">Display Order</label>
-    <input asp-for="ObjCategory.DisplayOrder" class="form-control border-0 shadow"/>
-    <span asp-validation-for="ObjCategory.DisplayOrder" class="text-danger"></span>
 
     <div class="row py-4 px-0 m-0 gap-2">
         <button type="submit" class="col btn btn-primary border  form-control">
