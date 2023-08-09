@@ -1,8 +1,7 @@
-﻿using System;
-using CBTD.Models;
+﻿using Infrastructure.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace CBTD.Data
+namespace DataAccess.Data
 {
 	public class ApplicationDbContext: DbContext
 	{

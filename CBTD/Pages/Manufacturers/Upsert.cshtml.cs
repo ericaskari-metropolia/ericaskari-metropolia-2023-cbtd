@@ -1,16 +1,16 @@
-using CBTD.Data;
-using CBTD.Models;
+using DataAccess.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace CBTD.Pages.Manufacturer;
+using Infrastructure.Models;
 
 public class UpsertModel : PageModel
 {
     private readonly ApplicationDbContext _db;
 
     [BindProperty] //synchonizes form fields with values in code behind
-    public Models.Manufacturer? ObjCategory { get; set; }
+    public Manufacturer? ObjCategory { get; set; }
 
 
     public UpsertModel(ApplicationDbContext db) //dependency injection
@@ -20,7 +20,7 @@ public class UpsertModel : PageModel
 
     public IActionResult OnGet(int? id)
     {
-        ObjCategory = new Models.Manufacturer();
+        ObjCategory = new Manufacturer();
 
         //edit mode
         if (id != 0)
