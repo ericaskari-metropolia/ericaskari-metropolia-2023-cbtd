@@ -3,22 +3,24 @@
 
 
 <h2 class="text-primary">@(Model?.ObjCategory?.Id != 0 ? "Update " : "Create ") Category</h2>
-<label asp-for="ObjCategory.Name" class="ms-2"></label>
-<input asp-for="ObjCategory.Name" class="form-control border-0 shadow"/>
-<span asp-validation-for="ObjCategory.Name" class="text-danger"></span>
-
-<label asp-for="ObjCategory.DisplayOrder" class="ms-2">Display Order</label>
-<input asp-for="ObjCategory.DisplayOrder" class="form-control border-0 shadow"/>
-<span asp-validation-for="ObjCategory.DisplayOrder" class="text-danger"></span>
-
-<div class="row py-4 px-0 m-0 gap-2">
-    <a asp-page="Index" class="col btn btn-primary border  form-control">
-        @(Model?.ObjCategory?.Id != 0 ? "Update " : "Create ")
-    </a>
-    <a asp-page="Index" class="col btn btn-outline-primary border  form-control">
-        Back to List
-    </a>
-</div>
+<form method="POST">
+    <label asp-for="ObjCategory.Name" class="ms-2"></label>
+    <input asp-for="ObjCategory.Name" class="form-control border-0 shadow"/>
+    <span asp-validation-for="ObjCategory.Name" class="text-danger"></span>
+    
+    <label asp-for="ObjCategory.DisplayOrder" class="ms-2">Display Order</label>
+    <input asp-for="ObjCategory.DisplayOrder" class="form-control border-0 shadow"/>
+    <span asp-validation-for="ObjCategory.DisplayOrder" class="text-danger"></span>
+    
+    <div class="row py-4 px-0 m-0 gap-2">
+        <button type="submit"  class="col btn btn-primary border  form-control">
+            @(Model?.ObjCategory?.Id != 0 ? "Update " : "Create ")
+        </button>
+        <a asp-page="Index" class="col btn btn-outline-primary border  form-control">
+            Back to List
+        </a>
+    </div>
+</form>
 
 @if (Model.ObjCategory.Id != 0)
 {
