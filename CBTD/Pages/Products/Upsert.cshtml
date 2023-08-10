@@ -1,0 +1,24 @@
+@page
+@model CBTD.Pages.Products.UpsertModel
+
+
+<h2 class="text-primary">@(Model?.Item?.Id != 0 ? "Update " : "Create ") Product</h2>
+<form method="POST">
+    @if (Model.Item.Id != 0)
+    {
+        <input type="hidden" asp-for="Item.Id"/>
+    }
+
+    <label asp-for="Item.Name" class="ms-2"></label>
+    <input asp-for="Item.Name" class="form-control border-0 shadow"/>
+    <span asp-validation-for="Item.Name" class="text-danger"></span>
+
+    <div class="row py-4 px-0 m-0 gap-2">
+        <button type="submit" class="col btn btn-primary border  form-control">
+            @(Model?.Item?.Id != 0 ? "Update " : "Create ")
+        </button>
+        <a asp-page="Index" class="col btn btn-outline-primary border  form-control">
+            Back to List
+        </a>
+    </div>
+</form>
