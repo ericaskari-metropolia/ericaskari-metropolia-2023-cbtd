@@ -1,3 +1,5 @@
+using Infrastructure;
+
 namespace CBTD.Pages.Categories;
 
 using DataAccess.Data;
@@ -7,15 +9,15 @@ using Infrastructure.Models;
 
 public class UpsertModel : PageModel
 {
-    private readonly ApplicationDbContext _db;
+    private readonly UnitOfWork _unitOfWork;
 
     [BindProperty] //synchonizes form fields with values in code behind
     public Category? ObjCategory { get; set; }
 
 
-    public UpsertModel(ApplicationDbContext db) //dependency injection
+    public UpsertModel(UnitOfWork unitOfWork) //dependency injection
     {
-        _db = db;
+        _unitOfWork = unitOfWork;
     }
 
     public IActionResult OnGet(int? id)
@@ -23,7 +25,7 @@ public class UpsertModel : PageModel
         ObjCategory = new Category();
 
         //edit mode
-        if (id != 0) ObjCategory = _db.Category.Find(id);
+        if (id != 0) ObjCategory = _unitOfWork.Category.GetById(id);
 
         //  Nullable because Upsert is used.
         if (ObjCategory == null) return NotFound();
@@ -39,17 +41,17 @@ public class UpsertModel : PageModel
         //if this is a new category
         if (ObjCategory.Id == 0)
         {
-            _db.Category.Add(ObjCategory);
+            _unitOfWork.Category.Add(ObjCategory);
             TempData["success"] = "Category added Successfully";
         }
         //if category exists
         else
         {
-            _db.Category.Update(ObjCategory);
+            _unitOfWork.Category.Update(ObjCategory);
             TempData["success"] = "Category updated Successfully";
         }
 
-        _db.SaveChanges();
+        _unitOfWork.Commit();
 
         return RedirectToPage("./Index");
     }

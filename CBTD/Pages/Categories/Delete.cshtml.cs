@@ -1,3 +1,5 @@
+using Infrastructure;
+
 namespace CBTD.Pages.Categories;
 
 using DataAccess.Data;
@@ -7,14 +9,14 @@ using Infrastructure.Models;
 
 public class DeleteModel : PageModel
 {
-    private readonly ApplicationDbContext _db;
+    private readonly UnitOfWork _unitOfWork;
 
     [BindProperty] //synchonizes form fields with values in code behind
     public Category? ObjCategory { get; set; }
 
-    public DeleteModel(ApplicationDbContext db) //dependency injection
+    public DeleteModel(UnitOfWork unitOfWork) //dependency injection
     {
-        _db = db;
+        _unitOfWork = unitOfWork;
     }
 
     public IActionResult OnGet(int? id)
@@ -22,7 +24,7 @@ public class DeleteModel : PageModel
         ObjCategory = new Category();
 
         //edit mode
-        if (id != 0) ObjCategory = _db.Category.Find(id);
+        if (id != 0) ObjCategory = _unitOfWork.Category.GetById(id);
 
         //  Nullable because Upsert is used.
         if (ObjCategory == null) return NotFound();
@@ -36,11 +38,11 @@ public class DeleteModel : PageModel
         //if this is a new category
         if (ObjCategory!.Id != 0)
         {
-            _db.Category.Remove(ObjCategory);
+            _unitOfWork.Category.Delete(ObjCategory);
             TempData["success"] = "Category deleted Successfully";
         }
 
-        _db.SaveChanges();
+        _unitOfWork.Commit();
 
         return RedirectToPage("./Index");
     }
