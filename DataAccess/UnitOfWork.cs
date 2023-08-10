@@ -14,6 +14,7 @@ public class UnitOfWork : IUnitOfWork
     // Lazy initialized Singleton references.
     private IGenericRepository<Category>? _category;
     private IGenericRepository<Manufacturer>? _manufacturer;
+    private IGenericRepository<Product>? _product;
 
     public UnitOfWork(ApplicationDbContext dbContext)
     {
@@ -23,6 +24,7 @@ public class UnitOfWork : IUnitOfWork
     // Singletons
     public IGenericRepository<Category> Category => _category ??= new GenericRepository<Category>(_dbContext);
     public IGenericRepository<Manufacturer> Manufacturer => _manufacturer ??= new GenericRepository<Manufacturer>(_dbContext);
+    public IGenericRepository<Product> Product => _product ??= new GenericRepository<Product>(_dbContext);
 
     public int Commit()
     {

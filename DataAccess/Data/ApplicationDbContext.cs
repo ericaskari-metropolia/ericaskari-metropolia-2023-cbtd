@@ -12,6 +12,7 @@ public class ApplicationDbContext : DbContext
 
     public DbSet<Category> Category { set; get; }
     public DbSet<Manufacturer> Manufacturer { set; get; }
+    public DbSet<Product> Product { set; get; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
