@@ -1,6 +1,7 @@
-﻿namespace DataAccess.Data;
+﻿using Infrastructure.Models;
 
-using Infrastructure.Models;
+namespace DataAccess.Data;
+
 using Microsoft.EntityFrameworkCore;
 
 public class ApplicationDbContext : DbContext
