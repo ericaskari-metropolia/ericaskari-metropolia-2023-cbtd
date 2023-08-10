@@ -12,7 +12,7 @@ public class UpsertModel : PageModel
     private readonly UnitOfWork _unitOfWork;
 
     [BindProperty] //synchonizes form fields with values in code behind
-    public Category? ObjCategory { get; set; }
+    public Category? Item { get; set; }
 
 
     public UpsertModel(UnitOfWork unitOfWork) //dependency injection
@@ -22,13 +22,13 @@ public class UpsertModel : PageModel
 
     public IActionResult OnGet(int? id)
     {
-        ObjCategory = new Category();
+        Item = new Category();
 
         //edit mode
-        if (id != 0) ObjCategory = _unitOfWork.Category.GetById(id);
+        if (id != 0) Item = _unitOfWork.Category.GetById(id);
 
         //  Nullable because Upsert is used.
-        if (ObjCategory == null) return NotFound();
+        if (Item == null) return NotFound();
 
         //create new mode
         return Page();
@@ -39,15 +39,15 @@ public class UpsertModel : PageModel
         if (!ModelState.IsValid) return Page();
 
         //if this is a new category
-        if (ObjCategory.Id == 0)
+        if (Item.Id == 0)
         {
-            _unitOfWork.Category.Add(ObjCategory);
+            _unitOfWork.Category.Add(Item);
             TempData["success"] = "Category added Successfully";
         }
         //if category exists
         else
         {
-            _unitOfWork.Category.Update(ObjCategory);
+            _unitOfWork.Category.Update(Item);
             TempData["success"] = "Category updated Successfully";
         }
 

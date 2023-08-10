@@ -12,7 +12,7 @@ public class DeleteModel : PageModel
     private readonly UnitOfWork _unitOfWork;
 
     [BindProperty] //synchonizes form fields with values in code behind
-    public Category? ObjCategory { get; set; }
+    public Category? Item { get; set; }
 
     public DeleteModel(UnitOfWork unitOfWork) //dependency injection
     {
@@ -21,13 +21,13 @@ public class DeleteModel : PageModel
 
     public IActionResult OnGet(int? id)
     {
-        ObjCategory = new Category();
+        Item = new Category();
 
         //edit mode
-        if (id != 0) ObjCategory = _unitOfWork.Category.GetById(id);
+        if (id != 0) Item = _unitOfWork.Category.GetById(id);
 
         //  Nullable because Upsert is used.
-        if (ObjCategory == null) return NotFound();
+        if (Item == null) return NotFound();
 
         //create new mode
         return Page();
@@ -36,9 +36,9 @@ public class DeleteModel : PageModel
     public IActionResult OnPost()
     {
         //if this is a new category
-        if (ObjCategory!.Id != 0)
+        if (Item!.Id != 0)
         {
-            _unitOfWork.Category.Delete(ObjCategory);
+            _unitOfWork.Category.Delete(Item);
             TempData["success"] = "Category deleted Successfully";
         }
 
