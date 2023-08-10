@@ -1,8 +1,8 @@
 using Infrastructure;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace CBTD.Pages.Products;
 
-using DataAccess.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Infrastructure.Models;
@@ -14,6 +14,9 @@ public class UpsertModel : PageModel
     [BindProperty] //synchonizes form fields with values in code behind
     public Product? Item { get; set; }
 
+    public IEnumerable<SelectListItem> CategoryList { get; set; }
+    public IEnumerable<SelectListItem> ManufacturerList { get; set; }
+
 
     public UpsertModel(UnitOfWork unitOfWork) //dependency injection
     {
@@ -23,6 +26,18 @@ public class UpsertModel : PageModel
     public IActionResult OnGet(int? id)
     {
         Item = new Product();
+        CategoryList = _unitOfWork.Category.GetAll().Select(Item => new SelectListItem
+        {
+            Text = Item.Name,
+            Value = Item.Id.ToString()
+        });
+        
+        ManufacturerList = _unitOfWork.Manufacturer.GetAll().Select(Item => new SelectListItem
+        {
+            Text = Item.Name,
+            Value = Item.Id.ToString()
+        });
+        
 
         //edit mode
         if (id != 0) Item = _unitOfWork.Product.GetById(id);
