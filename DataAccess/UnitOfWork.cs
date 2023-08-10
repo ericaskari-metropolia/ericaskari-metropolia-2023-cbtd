@@ -6,10 +6,6 @@ namespace Infrastructure;
 using Interfaces;
 using Models;
 
-
-
-
-
 public class UnitOfWork : IUnitOfWork
 {
     private readonly ApplicationDbContext _dbContext; //dependency injection of Data Source
@@ -20,6 +16,7 @@ public class UnitOfWork : IUnitOfWork
     }
 
     private IGenericRepository<Category> _Category;
+    private IGenericRepository<Manufacturer> _Manufacturer;
     //ADD ADDITIONAL MODELS HERE
 
     public IGenericRepository<Category> Category
@@ -35,7 +32,18 @@ public class UnitOfWork : IUnitOfWork
         }
     }
 
-    public IGenericRepository<Manufacturer> Manufacturer => throw new NotImplementedException();
+    public IGenericRepository<Manufacturer> Manufacturer
+    {
+        get
+        {
+            if (_Manufacturer == null)
+            {
+                _Manufacturer = new GenericRepository<Manufacturer>(_dbContext);
+            }
+
+            return _Manufacturer;
+        }
+    }
 
     //ADD ADDITIONAL METHODS FOR EACH MODEL (similar to Category) HERE
 

@@ -1,12 +1,11 @@
 ﻿using DataAccess.Data;
+using Infrastructure;
 using Microsoft.EntityFrameworkCore;
 
 WebApplicationBuilder? builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
-
-
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
     options.UseMySql(
@@ -14,6 +13,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
         new MySqlServerVersion(new Version(8, 1, 0))
     ).UseSnakeCaseNamingConvention();
 });
+
+builder.Services.AddScoped<UnitOfWork>();
 
 WebApplication? app = builder.Build();
 
