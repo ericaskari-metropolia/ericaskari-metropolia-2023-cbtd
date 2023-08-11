@@ -1,6 +1,7 @@
-﻿using DataAccess.Data;
+using DataAccess.Data;
 using Infrastructure;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 WebApplicationBuilder? builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +14,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
         new MySqlServerVersion(new Version(8, 1, 0))
     ).UseSnakeCaseNamingConvention();
 });
+
+builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<ApplicationDbContext>();
 
 builder.Services.AddScoped<UnitOfWork>();
 
