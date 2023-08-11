@@ -1,7 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-
-namespace Infrastructure.Models;
+using Infrastructure.Models;
 
 public class Product
 {
@@ -9,10 +8,10 @@ public class Product
     public int Id { get; set; }
 
     [Required]
-    public string Name { get; set; }
+    public string? Name { get; set; }
 
     [Required]
-    public string Description { get; set; }
+    public string? Description { get; set; }
 
     [Required]
     [Display(Name = "MSRP List Price")]
@@ -35,15 +34,15 @@ public class Product
     public double DozenPrice { get; set; }
 
     [Required]
-    public string Size { get; set; }
+    public string? Size { get; set; }
 
     [Required]
-    public string UPC { get; set; }
+    public string? UPC { get; set; }
 
-    public string ImageUrl { get; set; }
+    public string? ImageUrl { get; set; }
 
     [Required]
-		
+
     [Display(Name = "Category")]
     public int CategoryId { get; set; }
     [Required]
@@ -55,8 +54,8 @@ public class Product
     /// </summary>
 
     [ForeignKey("CategoryId")]
-    public Category Category { get; set; }
+    public Category? Category { get; set; }
 
     [ForeignKey("ManufacturerId")]
-    public Manufacturer	Manufacturer { get; set; }
+    public Manufacturer? Manufacturer { get; set; }
 }

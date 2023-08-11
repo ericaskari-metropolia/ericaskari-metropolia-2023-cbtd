@@ -1,3 +1,5 @@
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using Infrastructure;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
@@ -10,6 +12,8 @@ using Infrastructure.Models;
 public class UpsertModel : PageModel
 {
     private readonly UnitOfWork _unitOfWork;
+    private readonly IWebHostEnvironment _webHostEnvironment;
+
 
     [BindProperty] //synchonizes form fields with values in code behind
     public Product? Item { get; set; }
@@ -18,13 +22,15 @@ public class UpsertModel : PageModel
     public IEnumerable<SelectListItem> ManufacturerList { get; set; }
 
 
-    public UpsertModel(UnitOfWork unitOfWork) //dependency injection
+    public UpsertModel(UnitOfWork unitOfWork, IWebHostEnvironment webHostEnvironment) //dependency injection
     {
         _unitOfWork = unitOfWork;
+        _webHostEnvironment = webHostEnvironment;
     }
 
     public IActionResult OnGet(int? id)
     {
+        FetchDropdowns();
         Console.WriteLine("Upsert Get");
         Item = new Product();
         CategoryList = _unitOfWork.Category.GetAll().Select(Item => new SelectListItem
@@ -32,13 +38,13 @@ public class UpsertModel : PageModel
             Text = Item.Name,
             Value = Item.Id.ToString()
         });
-        
+
         ManufacturerList = _unitOfWork.Manufacturer.GetAll().Select(Item => new SelectListItem
         {
             Text = Item.Name,
             Value = Item.Id.ToString()
         });
-        
+
 
         //edit mode
         if (id != 0) Item = _unitOfWork.Product.GetById(id);
@@ -52,23 +58,78 @@ public class UpsertModel : PageModel
 
     public IActionResult OnPost()
     {
+        FetchDropdowns();
+
+        Console.WriteLine("Product Upsert");
+        string jsonString = JsonSerializer.Serialize(Item);
+        Console.WriteLine(JsonSerializer.Serialize(ModelState.ErrorCount));
+        Console.WriteLine(jsonString);
+        Console.WriteLine(JsonSerializer.Serialize(ModelState));
+
         if (!ModelState.IsValid) return Page();
 
-        //if this is a new category
+        string webRootPath = _webHostEnvironment.WebRootPath;
+        var files = HttpContext.Request.Form.Files;
+
         if (Item.Id == 0)
         {
-            _unitOfWork.Product.Add(Item);
-            TempData["success"] = "Product added Successfully";
+            this.CreateProduct();
         }
-        //if category exists
         else
         {
-            _unitOfWork.Product.Update(Item);
-            TempData["success"] = "Product updated Successfully";
+            UpdateProduct();
         }
 
-        _unitOfWork.Commit();
-
         return RedirectToPage("./Index");
+    }
+
+    private void CreateProduct()
+    {
+        
+        string webRootPath = _webHostEnvironment.WebRootPath;
+        var files = HttpContext.Request.Form.Files;
+        if (files.Count == 0)
+        {
+            TempData["error"] = "Image is required.";
+            return;
+        }
+
+        //create a unique identifier for image name
+        string fileName = Guid.NewGuid().ToString();
+        //create variable to hold a path to images\products
+        var uploads = Path.Combine(webRootPath, @"images/products/");
+        Console.WriteLine($"uploads: {uploads}");
+        var extension = Path.GetExtension(files[0].FileName);
+        Console.WriteLine($"extension: {extension}");
+        var fullPath = uploads + fileName + extension;
+        Console.WriteLine($"fullPath: {fullPath}");
+        using var fileStream = System.IO.File.Create(fullPath);
+        files[0].CopyTo(fileStream);
+        Item.ImageUrl = @"\images\products\" + fileName + extension;
+        _unitOfWork.Product.Add(Item);
+        _unitOfWork.Commit();
+        TempData["success"] = "Product added Successfully";
+    }
+
+    private void UpdateProduct()
+    {
+        _unitOfWork.Product.Update(Item);
+        _unitOfWork.Commit();
+        TempData["success"] = "Product updated Successfully";
+    }
+    
+    private void FetchDropdowns()
+    {
+        CategoryList = _unitOfWork.Category.GetAll().Select(Item => new SelectListItem
+        {
+            Text = Item.Name,
+            Value = Item.Id.ToString()
+        });
+
+        ManufacturerList = _unitOfWork.Manufacturer.GetAll().Select(Item => new SelectListItem
+        {
+            Text = Item.Name,
+            Value = Item.Id.ToString()
+        });
     }
 }

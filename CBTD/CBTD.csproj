@@ -17,6 +17,7 @@
         </PackageReference>
         <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.9"/>
         <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="7.0.0"/>
+        <PackageReference Include="System.Text.Json" Version="7.0.3" />
     </ItemGroup>
     <ItemGroup>
         <None Remove="Data\"/>
@@ -28,5 +29,8 @@
       <AdditionalFiles Include="Pages\Products\Delete.cshtml" />
       <AdditionalFiles Include="Pages\Products\Index.cshtml" />
       <AdditionalFiles Include="Pages\Products\Upsert.cshtml" />
+    </ItemGroup>
+    <ItemGroup>
+      <Folder Include="wwwroot\images\products\" />
     </ItemGroup>
 </Project>
