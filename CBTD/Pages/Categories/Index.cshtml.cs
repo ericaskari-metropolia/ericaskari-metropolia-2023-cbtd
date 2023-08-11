@@ -9,8 +9,9 @@ using Infrastructure.Models;
 public class IndexModel : PageModel
 {
     private readonly UnitOfWork _unitOfWork;
+
     //our UI front end will support looping through and displaying Categories retrieved from the database and stored in a List
-    public List<Category> ItemList; 
+    public List<Category> ItemList;
 
     public IndexModel(UnitOfWork unitOfWork)
     {

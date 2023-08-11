@@ -64,90 +64,90 @@
 		}
 	</script>
 }
+
 <form method="post" asp-action="Upsert" enctype="multipart/form-data">
-	<input asp-for="Item.Id" hidden />
-	<input asp-for="Item.ImageUrl" hidden />
+    <input asp-for="Item.Id" hidden/>
+    <input asp-for="Item.ImageUrl" hidden/>
 
-	<div class="row">
-		<div class="col-10">
-			<div class="border p-3 mt-4 row">
-				<div class="col-12 pb-2">
-					<h2 class="text-primary">@(Model.Item.Id != 0 ? "Update" : "Create")  Product</h2>
-					<hr />
-				</div>
+    <div class="row">
+        <div class="col-10">
+            <div class="border p-3 mt-4 row">
+                <div class="col-12 pb-2">
+                    <h2 class="text-primary">@(Model.Item.Id != 0 ? "Update" : "Create") Product</h2>
+                    <hr/>
+                </div>
 
-				<div class="mb-3">
-					<label asp-for="Item.Name"></label>
-					<input id="txtName" asp-for="Item.Name" class="form-control" />
-				</div>
-				<div class="mb-3">
-					<label asp-for="Item.Description"></label>
-					<textarea id="txtDesc" asp-for="Item.Description" rows="3" class="form-control"></textarea>
-				</div>
-				<div class="mb-3 col-6">
-					<label asp-for="Item.UPC"></label>
-					<input id="txtUPC" asp-for="Item.UPC" class="form-control" />
-				</div>
-				<div class="mb-3 col-6">
-					<label asp-for="Item.Size"></label>
-					<input asp-for="Item.Size" class="form-control" />
-				</div>
-				<div class="mb-3 col-6">
-					<label asp-for="Item.ListPrice"></label>
-					<input id="txtListPrice" asp-for="Item.ListPrice" class="form-control" />
-				</div>
-				<div class="mb-3 col-6">
-					<label asp-for="Item.UnitPrice"></label>
-					<input id="txtUnitPrice" asp-for="Item.UnitPrice" class="form-control" />
-				</div>
-				<div class="mb-3 col-6">
-					<label asp-for="Item.HalfDozenPrice"></label>
-					<input id="txtHalfDozenPrice" asp-for="Item.HalfDozenPrice" class="form-control" />
-				</div>
-				<div class="mb-3 col-6">
-					<label asp-for="Item.DozenPrice"></label>
-					<input id="txtDozenPrice" asp-for="Item.DozenPrice" class="form-control" />
-				</div>
-				<div class="mb-3">
-					<label asp-for="Item.ImageUrl"></label>
-					<input asp-for="Item.ImageUrl" type="file" id="uploadBox" name="file" class="form-control" />
-					<InputFile  />
+                <div class="mb-3">
+                    <label asp-for="Item.Name"></label>
+                    <input id="txtName" asp-for="Item.Name" class="form-control"/>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Item.Description"></label>
+                    <textarea id="txtDesc" asp-for="Item.Description" rows="3" class="form-control"></textarea>
+                </div>
+                <div class="mb-3 col-6">
+                    <label asp-for="Item.UPC"></label>
+                    <input id="txtUPC" asp-for="Item.UPC" class="form-control"/>
+                </div>
+                <div class="mb-3 col-6">
+                    <label asp-for="Item.Size"></label>
+                    <input asp-for="Item.Size" class="form-control"/>
+                </div>
+                <div class="mb-3 col-6">
+                    <label asp-for="Item.ListPrice"></label>
+                    <input id="txtListPrice" asp-for="Item.ListPrice" class="form-control"/>
+                </div>
+                <div class="mb-3 col-6">
+                    <label asp-for="Item.UnitPrice"></label>
+                    <input id="txtUnitPrice" asp-for="Item.UnitPrice" class="form-control"/>
+                </div>
+                <div class="mb-3 col-6">
+                    <label asp-for="Item.HalfDozenPrice"></label>
+                    <input id="txtHalfDozenPrice" asp-for="Item.HalfDozenPrice" class="form-control"/>
+                </div>
+                <div class="mb-3 col-6">
+                    <label asp-for="Item.DozenPrice"></label>
+                    <input id="txtDozenPrice" asp-for="Item.DozenPrice" class="form-control"/>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Item.ImageUrl"></label>
+                    <input asp-for="Item.ImageUrl" type="file" id="uploadBox" name="file" class="form-control"/>
+                    <InputFile/>
 
-				</div>
+                </div>
 
-				<div class="mb-3 col-6">
-					<label asp-for="Item.CategoryId"></label>
-					<select id="ddlCategory" asp-for="Item.CategoryId" asp-items="@Model.CategoryList" class="form-select">
-						<option disabled selected>--Select Category--</option>
-					</select>
-				</div>
+                <div class="mb-3 col-6">
+                    <label asp-for="Item.CategoryId"></label>
+                    <select id="ddlCategory" asp-for="Item.CategoryId" asp-items="@Model.CategoryList" class="form-select">
+                        <option disabled selected>--Select Category--</option>
+                    </select>
+                </div>
 
-				<div class="mb-3 col-6">
-					<label asp-for="Item.ManufacturerId"></label>
-					<select id="ddlManufacturer" asp-for="Item.ManufacturerId" asp-items="@Model.ManufacturerList" class="form-select">
-						<option disabled selected>--Select Manufacturer--</option>
-					</select>
-				</div>
-				<div class="col-12">
-					@if (Model.Item.Id != 0)
-					{
-						<button type="submit" class="btn btn-primary" style="width:150px">Update</button>
-					}
-					else
-					{
-						<button type="submit" onclick="return ValidateInput()" class="btn btn-primary" style="width:150px">Create</button>
-					}
-					<a asp-page="Index" class="btn btn-secondary" style="width:150px">
-						Back to List
-					</a>
-				</div>
+                <div class="mb-3 col-6">
+                    <label asp-for="Item.ManufacturerId"></label>
+                    <select id="ddlManufacturer" asp-for="Item.ManufacturerId" asp-items="@Model.ManufacturerList" class="form-select">
+                        <option disabled selected>--Select Manufacturer--</option>
+                    </select>
+                </div>
+                <div class="col-12">
+                    @if (Model.Item.Id != 0)
+                    {
+                        <button type="submit" class="btn btn-primary" style="width:150px">Update</button>
+                    }
+                    else
+                    {
+                        <button type="submit" onclick="return ValidateInput()" class="btn btn-primary" style="width:150px">Create</button>
+                    }
+                    <a asp-page="Index" class="btn btn-secondary" style="width:150px">
+                        Back to List
+                    </a>
+                </div>
 
-			</div>
-		</div>
-		<div class="col-2 pt-4">
-			<img src="@Model.Item.ImageUrl"
-				 width="100%" style="border-radius:5px; border:1px solid #bbb9b9" />
-		</div>
-	</div>
+            </div>
+        </div>
+        <div class="col-2 pt-4">
+            <img src="@Model.Item.ImageUrl"
+                 width="100%" style="border-radius:5px; border:1px solid #bbb9b9"/>
+        </div>
+    </div>
 </form>
-

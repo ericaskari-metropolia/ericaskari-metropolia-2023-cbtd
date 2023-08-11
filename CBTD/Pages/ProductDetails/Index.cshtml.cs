@@ -7,8 +7,7 @@ namespace CBTD.Pages.ProductDetails;
 public class IndexModel : PageModel
 {
     private readonly UnitOfWork _unitOfWork;
-    [BindProperty]
-    public int txtCount { get; set; }
+    [BindProperty] public int txtCount { get; set; }
 
     public Product objProduct { get; set; }
 
@@ -16,10 +15,10 @@ public class IndexModel : PageModel
     {
         _unitOfWork = unitOfWork;
     }
+
     public IActionResult OnGet(int? productId)
     {
         objProduct = _unitOfWork.Product.Get(p => p.Id == productId, includes: "Category,Manufacturer");
         return Page();
     }
 }
-

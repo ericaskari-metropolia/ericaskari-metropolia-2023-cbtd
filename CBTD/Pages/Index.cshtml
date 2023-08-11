@@ -1,10 +1,11 @@
 ﻿@page
+@using Infrastructure.Models
 @model IndexModel
 @{
     ViewData["Title"] = "Home page";
 }
 
-@foreach (var category in Model.objCategoryList)
+@foreach (Category? category in Model.objCategoryList)
 {
 @if (Model.objProductList.Where(p => p.CategoryId == category.Id).Count() > 0)
 {
@@ -17,7 +18,7 @@
                 <div class="col-12">
 
                     <div class="row pb-3">
-                        @foreach (var product in Model.objProductList.Where(c => c.CategoryId == category.Id))
+                        @foreach (Product? product in Model.objProductList.Where(c => c.CategoryId == category.Id))
                         {
                             <div class="col-lg-3 col-md-6">
                                 <div class="row p-2">

@@ -69,25 +69,20 @@ public class UpsertModel : PageModel
         if (!ModelState.IsValid) return Page();
 
         string webRootPath = _webHostEnvironment.WebRootPath;
-        var files = HttpContext.Request.Form.Files;
+        IFormFileCollection? files = HttpContext.Request.Form.Files;
 
         if (Item.Id == 0)
-        {
-            this.CreateProduct();
-        }
+            CreateProduct();
         else
-        {
             UpdateProduct();
-        }
 
         return RedirectToPage("./Index");
     }
 
     private void CreateProduct()
     {
-        
         string webRootPath = _webHostEnvironment.WebRootPath;
-        var files = HttpContext.Request.Form.Files;
+        IFormFileCollection? files = HttpContext.Request.Form.Files;
         if (files.Count == 0)
         {
             TempData["error"] = "Image is required.";
@@ -97,13 +92,13 @@ public class UpsertModel : PageModel
         //create a unique identifier for image name
         string fileName = Guid.NewGuid().ToString();
         //create variable to hold a path to images\products
-        var uploads = Path.Combine(webRootPath, @"images/products/");
+        string? uploads = Path.Combine(webRootPath, @"images/products/");
         Console.WriteLine($"uploads: {uploads}");
-        var extension = Path.GetExtension(files[0].FileName);
+        string? extension = Path.GetExtension(files[0].FileName);
         Console.WriteLine($"extension: {extension}");
-        var fullPath = uploads + fileName + extension;
+        string? fullPath = uploads + fileName + extension;
         Console.WriteLine($"fullPath: {fullPath}");
-        using var fileStream = System.IO.File.Create(fullPath);
+        using FileStream? fileStream = System.IO.File.Create(fullPath);
         files[0].CopyTo(fileStream);
         Item.ImageUrl = @"\images\products\" + fileName + extension;
         _unitOfWork.Product.Add(Item);
@@ -117,7 +112,7 @@ public class UpsertModel : PageModel
         _unitOfWork.Commit();
         TempData["success"] = "Product updated Successfully";
     }
-    
+
     private void FetchDropdowns()
     {
         CategoryList = _unitOfWork.Category.GetAll().Select(Item => new SelectListItem

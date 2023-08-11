@@ -4,14 +4,11 @@ using Infrastructure.Models;
 
 public class Product
 {
-    [Key]
-    public int Id { get; set; }
+    [Key] public int Id { get; set; }
 
-    [Required]
-    public string? Name { get; set; }
+    [Required] public string? Name { get; set; }
 
-    [Required]
-    public string? Description { get; set; }
+    [Required] public string? Description { get; set; }
 
     [Required]
     [Display(Name = "MSRP List Price")]
@@ -33,18 +30,16 @@ public class Product
     [Display(Name = "Price 12 or more")]
     public double DozenPrice { get; set; }
 
-    [Required]
-    public string? Size { get; set; }
+    [Required] public string? Size { get; set; }
 
-    [Required]
-    public string? UPC { get; set; }
+    [Required] public string? UPC { get; set; }
 
     public string? ImageUrl { get; set; }
 
     [Required]
-
     [Display(Name = "Category")]
     public int CategoryId { get; set; }
+
     [Required]
     [Display(Name = "Manufacturer")]
     public int ManufacturerId { get; set; }
@@ -56,6 +51,5 @@ public class Product
     [ForeignKey("CategoryId")]
     public Category? Category { get; set; }
 
-    [ForeignKey("ManufacturerId")]
-    public Manufacturer? Manufacturer { get; set; }
+    [ForeignKey("ManufacturerId")] public Manufacturer? Manufacturer { get; set; }
 }

@@ -11,6 +11,7 @@ dotnet ef database update --project DataAccess --context ApplicationDbContext --
 ```
 
 ## Steps to run the project locally on MACOS
+
 1. ```bash echo "127.0.0.1       cbtd.localnet" >> /etc/hosts```
 2. Create Local SSL Root Authority (Only once) [Go to section](#generate-authority-keys-for-development)
 3. Create Domain Certificate (Only once) [Go to section](#generate-domain-certificate)
@@ -25,6 +26,7 @@ dotnet ef database update --project DataAccess --context ApplicationDbContext --
 #mkdir -p ~/dev-ca && openssl genrsa -out ~/dev-ca/certificate-authority.key 2048
 #mkdir -p ~/dev-ca && openssl req -x509 -config ssl.cnf -new -nodes -key ~/dev-ca/certificate-authority.key -sha256 -days 1825 -out ~/dev-ca/certificate-authority.pem
 ```
+
 Double click on certificate and add it to the keychain and choose always trust.
 
 ### Generate Domain Certificate
