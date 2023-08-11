@@ -1,5 +1,15 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
-CBTD/wwwroot/images/products/
+CBTD/wwwroot/images/products/*
+!CBTD/wwwroot/images/products/Cheetos.jpg
+!CBTD/wwwroot/images/products/Coke.jpg
+!CBTD/wwwroot/images/products/Doritos.jpg
+!CBTD/wwwroot/images/products/HonestTea.jpg
+!CBTD/wwwroot/images/products/Menage.jpg
+!CBTD/wwwroot/images/products/OrderConfirmation.png
+!CBTD/wwwroot/images/products/Sprite.jpg
+!CBTD/wwwroot/images/products/YellowTail.png
+!CBTD/wwwroot/images/products/ZeroWater.jpg
+
 ssl.key
 ssl.crt
 ssl.csr
