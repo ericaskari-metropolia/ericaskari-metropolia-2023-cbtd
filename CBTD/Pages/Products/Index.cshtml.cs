@@ -20,6 +20,7 @@ public class IndexModel : PageModel
 
     public PageResult OnGet()
     {
+        Console.WriteLine("Index Get");
         //There are five major sets of IActionResult Types the can be returned
         //1. Server Status Code Results
         //2. Server Status Code and Object Results

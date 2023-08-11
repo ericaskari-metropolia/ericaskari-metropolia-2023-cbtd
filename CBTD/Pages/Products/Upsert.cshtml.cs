@@ -25,6 +25,7 @@ public class UpsertModel : PageModel
 
     public IActionResult OnGet(int? id)
     {
+        Console.WriteLine("Upsert Get");
         Item = new Product();
         CategoryList = _unitOfWork.Category.GetAll().Select(Item => new SelectListItem
         {

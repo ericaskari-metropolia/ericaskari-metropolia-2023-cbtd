@@ -65,10 +65,7 @@
 	</script>
 }
 
-
-<h2 class="text-primary">@(Model?.Item?.Id != 0 ? "Update " : "Create ") Product</h2>
-
-<form method="post" asp-action="Upsert" enctype="multipart/form-data">
+<form method="post"  enctype="multipart/form-data">
     <input asp-for="Item.Id" hidden/>
     <input asp-for="Item.ImageUrl" hidden/>
 
