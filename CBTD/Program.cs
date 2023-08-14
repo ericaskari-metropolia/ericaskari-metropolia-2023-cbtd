@@ -1,16 +1,7 @@
-using DataAccess;
 using DataAccess.Data;
 using Infrastructure;
-using Infrastructure.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
-
-void SeedDatabase(WebApplication webApplication)
-{
-    using var scope = webApplication.Services.CreateScope();
-    var dbInitializer = scope.ServiceProvider.GetRequiredService<DbInitializer>();
-    dbInitializer.Initialize();
-}
 
 WebApplicationBuilder? builder = WebApplication.CreateBuilder(args);
 
@@ -24,15 +15,11 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     ).UseSnakeCaseNamingConvention();
 });
 
-builder.Services.AddIdentity<ApplicationUser, IdentityRole>().AddDefaultTokenProviders().AddEntityFrameworkStores<ApplicationDbContext>();
+builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddDefaultTokenProviders().AddEntityFrameworkStores<ApplicationDbContext>();
 
 builder.Services.AddScoped<UnitOfWork>();
 
-builder.Services.AddScoped<DbInitializer>();
-
-
 WebApplication? app = builder.Build();
-
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -51,7 +38,4 @@ app.UseAuthorization();
 
 app.MapRazorPages();
 
-SeedDatabase(app);
-
 app.Run();
-

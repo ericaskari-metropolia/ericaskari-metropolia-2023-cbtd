@@ -26,5 +26,12 @@ services:
       MYSQL_PASSWORD: cbtd-dev
       MYSQL_DATABASE: cbtd-dev
       MYSQL_ROOT_PASSWORD: cbtd-dev
+  cbtd--mailhog:
+    container_name: cbtd--mailhog
+    image: mailhog/mailhog:v1.0.1
+    restart: 'no'
+    ports:
+      - "1025:1025"
+      - "8025:8025"
 volumes:
   cbtd--mysql:
