@@ -53,8 +53,8 @@
                             <a class="dropdown-item" asp-area="" asp-page="/Roles/Index">Roles</a>
                         </div>
                     </li>
-
                 </ul>
+                <partial name="_LoginPartial"/>
             </div>
         </div>
     </nav>
@@ -62,7 +62,6 @@
 <div class="container">
     <main role="main" class="pb-3">
         <partial name="_Notification"/>
-        <partial name="_LoginPartial"/>
         @RenderBody()
     </main>
 </div>
