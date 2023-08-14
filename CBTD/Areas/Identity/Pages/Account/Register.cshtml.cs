@@ -116,6 +116,9 @@ namespace CBTD.Areas.Identity.Pages.Account
 
         public async Task OnGetAsync(string returnUrl = null)
         {
+            await _emailSender.SendEmailAsync("ericaskari@gmail.com", "Confirm your email",
+                $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode("Something")}'>clicking here</a>.");
+
             Input = new InputModel()
             {
                 RoleList = _roleManager.Roles.Select(x => x.Name).Select(i => new SelectListItem

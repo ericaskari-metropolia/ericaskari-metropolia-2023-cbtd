@@ -9,7 +9,7 @@ CBTD/wwwroot/images/products/*
 !CBTD/wwwroot/images/products/Sprite.jpg
 !CBTD/wwwroot/images/products/YellowTail.png
 !CBTD/wwwroot/images/products/ZeroWater.jpg
-
+.env
 ssl.key
 ssl.crt
 ssl.csr
