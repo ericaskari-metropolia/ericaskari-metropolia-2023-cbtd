@@ -1,7 +1,10 @@
 using DataAccess.Data;
 using Infrastructure;
+using Infrastructure.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using Utility;
 
 WebApplicationBuilder? builder = WebApplication.CreateBuilder(args);
 
@@ -12,12 +15,14 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseMySql(
         builder.Configuration.GetConnectionString("DefaultConnection"),
         new MySqlServerVersion(new Version(8, 1, 0))
-    ).UseSnakeCaseNamingConvention();
+    ).UseSnakeCaseNamingConvention().EnableSensitiveDataLogging();
 });
 
-builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddDefaultTokenProviders().AddEntityFrameworkStores<ApplicationDbContext>();
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>().AddDefaultTokenProviders().AddEntityFrameworkStores<ApplicationDbContext>();
 
 builder.Services.AddScoped<UnitOfWork>();
+
+builder.Services.AddSingleton<IEmailSender, EmailSender>();
 
 WebApplication? app = builder.Build();
 
