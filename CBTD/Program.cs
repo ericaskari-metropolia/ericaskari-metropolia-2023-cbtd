@@ -1,6 +1,7 @@
 using DataAccess;
 using DataAccess.Data;
 using Infrastructure;
+using Infrastructure.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 
@@ -23,7 +24,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     ).UseSnakeCaseNamingConvention();
 });
 
-builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddDefaultTokenProviders().AddEntityFrameworkStores<ApplicationDbContext>();
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>().AddDefaultTokenProviders().AddEntityFrameworkStores<ApplicationDbContext>();
 
 builder.Services.AddScoped<UnitOfWork>();
 
@@ -32,7 +33,6 @@ builder.Services.AddScoped<DbInitializer>();
 
 WebApplication? app = builder.Build();
 
-SeedDatabase(app);
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -50,6 +50,8 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.MapRazorPages();
+
+SeedDatabase(app);
 
 app.Run();
 

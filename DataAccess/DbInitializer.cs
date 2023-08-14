@@ -2,21 +2,18 @@ using DataAccess.Data;
 using Infrastructure.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 using Utility;
 
 namespace DataAccess;
 
 public class DbInitializer
 {
-    private readonly Logger<DbInitializer> _logger;
     private readonly ApplicationDbContext _db;
-    private readonly UserManager<IdentityUser> _userManager;
+    private readonly UserManager<ApplicationUser> _userManager;
     private readonly RoleManager<IdentityRole> _roleManager;
 
-    public DbInitializer(Logger<DbInitializer> logger, ApplicationDbContext db, UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager)
+    public DbInitializer(ApplicationDbContext db, UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
     {
-        _logger = logger;
         _db = db;
         _userManager = userManager;
         _roleManager = roleManager;
@@ -37,7 +34,7 @@ public class DbInitializer
         }
         catch (Exception)
         {
-            _logger.LogError("Failed to run pending migrations");
+            Console.WriteLine("Failed to run pending migrations");
         }
 
         //check to see if one table has data.  If so, do not insert any data
