@@ -165,7 +165,7 @@ namespace DataAccess.Migrations
                     b.ToTable("manufacturer", (string)null);
                 });
 
-            modelBuilder.Entity("Infrastructure.Models.ShoppingCart", b =>
+            modelBuilder.Entity("Infrastructure.Models.ShoppingCartItem", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -185,15 +185,15 @@ namespace DataAccess.Migrations
                         .HasColumnName("product_id");
 
                     b.HasKey("Id")
-                        .HasName("pk_shopping_cart");
+                        .HasName("pk_shopping_cart_item");
 
                     b.HasIndex("ApplicationUserId")
-                        .HasDatabaseName("ix_shopping_cart_application_user_id");
+                        .HasDatabaseName("ix_shopping_cart_item_application_user_id");
 
                     b.HasIndex("ProductId")
-                        .HasDatabaseName("ix_shopping_cart_product_id");
+                        .HasDatabaseName("ix_shopping_cart_item_product_id");
 
-                    b.ToTable("shopping_cart", (string)null);
+                    b.ToTable("shopping_cart_item", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -423,19 +423,19 @@ namespace DataAccess.Migrations
                     b.ToTable("product", (string)null);
                 });
 
-            modelBuilder.Entity("Infrastructure.Models.ShoppingCart", b =>
+            modelBuilder.Entity("Infrastructure.Models.ShoppingCartItem", b =>
                 {
                     b.HasOne("Infrastructure.Models.ApplicationUser", "ApplicationUser")
                         .WithMany()
                         .HasForeignKey("ApplicationUserId")
-                        .HasConstraintName("fk_shopping_cart_application_user_application_user_id");
+                        .HasConstraintName("fk_shopping_cart_item_application_user_application_user_id");
 
                     b.HasOne("Product", "Product")
                         .WithMany()
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("fk_shopping_cart_product_product_id");
+                        .HasConstraintName("fk_shopping_cart_item_product_product_id");
 
                     b.Navigation("ApplicationUser");
 

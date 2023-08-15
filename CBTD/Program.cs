@@ -31,15 +31,18 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     ).UseSnakeCaseNamingConvention().EnableSensitiveDataLogging();
 });
 
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.LoginPath = $"/Identity/Account/Login";
+    options.LogoutPath = $"/Identity/Account/Logout";
+    options.AccessDeniedPath = $"/Identity/Account/AccessDenied";
+});
+
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>().AddDefaultTokenProviders().AddEntityFrameworkStores<ApplicationDbContext>();
 
 builder.Services.AddScoped<UnitOfWork>();
 
 builder.Services.AddScoped<DbInitializer>();
-
-
-
-
 
 builder.Services.AddSingleton<IEmailSender, EmailSender>();
 

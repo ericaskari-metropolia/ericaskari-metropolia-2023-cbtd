@@ -1,6 +1,7 @@
 using System.Linq.Expressions;
 using DataAccess.Data;
 using Infrastructure.Interfaces;
+using Infrastructure.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Repositories;
@@ -181,17 +182,19 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
             else
                 return queryable.Where(predicate).OrderBy(orderBy).ToList();
         }
+        
+        
     }
 
-    // public int DecrementCount(ShoppingCart shoppingCart, int count)
-    // {
-    // 	shoppingCart.Count -= count;
-    // 	return shoppingCart.Count;
-    // }
-    //
-    // public int IncrementCount(ShoppingCart shoppingCart, int count)
-    // {
-    // 	//shoppingCart.Count += count;
-    // 	return shoppingCart.Count += count;
-    // }
+    public int DecrementCount(ShoppingCartItem shoppingCartItem, int count)
+    {
+        shoppingCartItem.Count -= count;
+        return shoppingCartItem.Count;
+    }
+
+    public int IncrementCount(ShoppingCartItem shoppingCartItem, int count)
+    {
+        shoppingCartItem.Count += count;
+        return shoppingCartItem.Count;
+    }
 }

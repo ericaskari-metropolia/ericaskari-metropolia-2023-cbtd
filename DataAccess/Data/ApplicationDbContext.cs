@@ -16,6 +16,6 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     public DbSet<Product> Product { set; get; }
     public DbSet<ApplicationUser> ApplicationUser { set; get; }
     
-    public DbSet<ShoppingCart> ShoppingCart { set; get; }
+    public DbSet<ShoppingCartItem> ShoppingCartItem { set; get; }
 
 }

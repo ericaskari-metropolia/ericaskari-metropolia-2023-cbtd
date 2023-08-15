@@ -13,9 +13,9 @@ public class IndexModel : PageModel
 
     public Product objProduct { get; set; }
 
-    public ShoppingCart objCart { get; set; }
+    public ShoppingCartItem ObjCartItem { get; set; }
 
-    
+
     public IndexModel(UnitOfWork unitOfWork)
     {
         _unitOfWork = unitOfWork;
@@ -30,5 +30,37 @@ public class IndexModel : PageModel
         objProduct = _unitOfWork.Product.Get(p => p.Id == productId, includes: "Category,Manufacturer");
         return Page();
     }
-    
+
+    public IActionResult OnPost(Product objProduct)
+    {
+        //check to see if we have a shopping cart and this item already for the user
+
+        var claimsIdentity = User.Identity as ClaimsIdentity;
+
+        var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
+
+        ShoppingCartItem cartItemFromDb = _unitOfWork.ShoppingCartItem.Get(
+            u => u.ApplicationUserId == claim.Value && u.ProductId == objProduct.Id);
+
+
+        if (cartItemFromDb == null)
+        {
+            ObjCartItem = new ShoppingCartItem();
+            ObjCartItem.ApplicationUserId = claim.Value;
+            ObjCartItem.ProductId = objProduct.Id;
+            ObjCartItem.Count = txtCount;
+            _unitOfWork.ShoppingCartItem.Add(ObjCartItem);
+            _unitOfWork.Commit();
+        }
+
+        else
+        {
+            _unitOfWork.ShoppingCartItem.IncrementCount(cartItemFromDb, txtCount);
+            _unitOfWork.ShoppingCartItem.Update(cartItemFromDb);
+            _unitOfWork.Commit();
+        }
+        return Page();
+
+        return RedirectToPage("Index");
+    }
 }

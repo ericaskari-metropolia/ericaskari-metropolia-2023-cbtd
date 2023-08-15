@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
 namespace Infrastructure.Models;
 
-public class ShoppingCart
+public class ShoppingCartItem
 {
     public int Id { get; set; }
     
@@ -21,4 +21,7 @@ public class ShoppingCart
     [ForeignKey("ApplicationUserId")]
     [ValidateNever]
     public ApplicationUser? ApplicationUser { get; set; }
+    
+    [NotMapped]
+    public double CartPrice { get; set; }
 }

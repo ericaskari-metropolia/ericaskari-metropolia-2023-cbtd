@@ -1,4 +1,5 @@
 using System.Linq.Expressions;
+using Infrastructure.Models;
 
 namespace Infrastructure.Interfaces;
 
@@ -44,4 +45,6 @@ public interface IGenericRepository<T> where T : class
 
     // Update all changes to an object
     void Update(T entity);
+    int IncrementCount(ShoppingCartItem shoppingCartItem, int count);
+    int DecrementCount(ShoppingCartItem shoppingCartItem, int count);
 }
