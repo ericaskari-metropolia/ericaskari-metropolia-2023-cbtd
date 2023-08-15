@@ -1,7 +1,7 @@
 ### Create Migration
 
 ```bash
-dotnet ef migrations add FreshStart --project DataAccess --context ApplicationDbContext --startup-project CBTD --verbose
+dotnet ef migrations add AddedOrderHeaderAndDetails --project DataAccess --context ApplicationDbContext --startup-project CBTD --verbose
 ```
 
 ### Run Migration

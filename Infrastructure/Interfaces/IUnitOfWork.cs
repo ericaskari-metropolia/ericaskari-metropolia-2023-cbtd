@@ -8,6 +8,8 @@ public interface IUnitOfWork
     public IGenericRepository<Manufacturer> Manufacturer { get; }
     public IGenericRepository<ApplicationUser> ApplicationUser { get; }
     public IGenericRepository<ShoppingCartItem> ShoppingCartItem { get; }
+    public IGenericRepository<OrderHeader> OrderHeader { get; }
+    public IGenericRepository<OrderDetails> OrderDetails { get; }
 
     //ADD other Models/Tables here as you create them
 
@@ -16,4 +18,6 @@ public interface IUnitOfWork
     int Commit();
 
     Task<int> CommitAsync();
+    
+    
 }
