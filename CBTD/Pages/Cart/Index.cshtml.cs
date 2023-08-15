@@ -58,4 +58,52 @@ public class IndexModel : PageModel
     {
         return GetPriceBasedOnQuantity(item.Count, item.Product.UnitPrice, item.Product.HalfDozenPrice, item.Product.DozenPrice);
     }
+    
+    public IActionResult OnPostMinus(int id)
+    {
+        var cart = _unitOfWork.ShoppingCartItem.Get(c => c.Id == id);
+        if (cart.Count == 1)
+        {
+            _unitOfWork.ShoppingCartItem.Delete(cart);
+        }
+
+
+        else
+        {
+            cart.Count -= 1;
+
+
+            _unitOfWork.ShoppingCartItem.Update(cart);
+        }
+        _unitOfWork.Commit();
+
+
+        var cnt = _unitOfWork.ShoppingCartItem.GetAll(u => u.ApplicationUserId == cart.ApplicationUserId).Count();
+        //HttpContext.Session.SetInt32(SD.ShoppingCart, cnt);
+        return RedirectToPage();
+    }
+    
+    public IActionResult OnPostPlus(int id)
+    {
+        var cart = _unitOfWork.ShoppingCartItem.Get(c => c.Id == id);
+        cart.Count += 1;
+
+        _unitOfWork.ShoppingCartItem.Update(cart);
+
+        _unitOfWork.Commit();
+
+        return RedirectToPage();
+    }
+    
+    public IActionResult OnPostRemove(int id)
+    {
+        var cart = _unitOfWork.ShoppingCartItem.Get(c => c.Id == id);
+        _unitOfWork.ShoppingCartItem.Delete(cart);
+        _unitOfWork.Commit();
+        var cnt = _unitOfWork.ShoppingCartItem.GetAll(u => u.ApplicationUserId == cart.ApplicationUserId).Count();
+        //HttpContext.Session.SetInt32(SD.ShoppingCart, cnt);
+        return RedirectToPage();
+
+
+    }
 }
