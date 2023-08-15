@@ -6,6 +6,10 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Utility;
 
+if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Development")
+{
+    DotNetEnv.Env.TraversePath().Load();
+}
 
 WebApplicationBuilder? builder = WebApplication.CreateBuilder(args);
 
@@ -26,12 +30,6 @@ builder.Services.AddScoped<UnitOfWork>();
 builder.Services.AddSingleton<IEmailSender, EmailSender>();
 
 WebApplication? app = builder.Build();
-
-if (app.Environment.IsDevelopment())
-{
-    Console.WriteLine("Loading environment variables from .env file in solution.");
-    DotNetEnv.Env.TraversePath().Load();
-}
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
