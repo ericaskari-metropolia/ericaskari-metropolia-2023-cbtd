@@ -1,3 +1,4 @@
+using DataAccess;
 using DataAccess.Data;
 using Infrastructure;
 using Infrastructure.Models;
@@ -5,6 +6,13 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Utility;
+
+void SeedDatabase(WebApplication webApplication)
+{
+    using var scope = webApplication.Services.CreateScope();
+    var dbInitializer = scope.ServiceProvider.GetRequiredService<DbInitializer>();
+    dbInitializer.Initialize();
+}
 
 if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Development")
 {
@@ -27,9 +35,17 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>().AddDefaultTokenPro
 
 builder.Services.AddScoped<UnitOfWork>();
 
+builder.Services.AddScoped<DbInitializer>();
+
+
+
+
+
 builder.Services.AddSingleton<IEmailSender, EmailSender>();
 
-WebApplication? app = builder.Build();
+WebApplication app = builder.Build();
+
+SeedDatabase(app);
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
