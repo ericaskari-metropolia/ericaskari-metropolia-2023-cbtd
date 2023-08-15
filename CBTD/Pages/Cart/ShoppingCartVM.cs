@@ -13,4 +13,7 @@ public class ShoppingCartVM
     public IEnumerable<ShoppingCartItem> cartItems { get; set; }
     
     public double CartTotal {get; set;}
+    
+    public OrderHeader OrderHeader { get; set; }
+
 }

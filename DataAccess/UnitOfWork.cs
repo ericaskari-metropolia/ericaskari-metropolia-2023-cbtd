@@ -18,7 +18,7 @@ public class UnitOfWork : IUnitOfWork
     private IGenericRepository<ApplicationUser>? _applicationUser;
     private IGenericRepository<ShoppingCartItem>? _shoppingCartItem;
     private IGenericRepository<OrderDetails>? _orderDetails;
-    private IGenericRepository<OrderHeader>? _orderHeader;
+    private IOrderHeaderRepository<OrderHeader>? _orderHeader;
 
     public UnitOfWork(ApplicationDbContext dbContext)
     {
@@ -32,7 +32,7 @@ public class UnitOfWork : IUnitOfWork
     public IGenericRepository<ApplicationUser> ApplicationUser => _applicationUser ??= new GenericRepository<ApplicationUser>(_dbContext);
     public IGenericRepository<ShoppingCartItem> ShoppingCartItem => _shoppingCartItem ??= new GenericRepository<ShoppingCartItem>(_dbContext);
     public IGenericRepository<OrderDetails> OrderDetails => _orderDetails ??= new GenericRepository<OrderDetails>(_dbContext);
-    public IGenericRepository<OrderHeader> OrderHeader => _orderHeader ??= new GenericRepository<OrderHeader>(_dbContext);
+    public IOrderHeaderRepository<OrderHeader> OrderHeader => _orderHeader ??= new OrderHeaderRepository(_dbContext);
 
     public int Commit()
     {

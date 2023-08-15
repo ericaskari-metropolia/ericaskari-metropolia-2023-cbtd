@@ -39,7 +39,7 @@ public class IndexModel : PageModel
         return Page();
     }
 
-    private double GetPriceBasedOnQuantity(double quantity, double unitPrice, double priceHalfDozen, double priceDozen)
+    public static double GetPriceBasedOnQuantity(double quantity, double unitPrice, double priceHalfDozen, double priceDozen)
     {
         if (quantity <= 5)
         {
@@ -54,7 +54,7 @@ public class IndexModel : PageModel
         return priceDozen;
     }
 
-    private double GetPriceBasedOnQuantity(ShoppingCartItem item)
+    public static double GetPriceBasedOnQuantity(ShoppingCartItem item)
     {
         return GetPriceBasedOnQuantity(item.Count, item.Product.UnitPrice, item.Product.HalfDozenPrice, item.Product.DozenPrice);
     }

@@ -34,4 +34,7 @@
         <AdditionalFiles Include="Pages\Products\Index.cshtml"/>
         <AdditionalFiles Include="Pages\Products\Upsert.cshtml"/>
     </ItemGroup>
+    <ItemGroup>
+      <Folder Include="Pages\OrderConfirmation\" />
+    </ItemGroup>
 </Project>
