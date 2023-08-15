@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230814074212_FreshStart")]
+    [Migration("20230815062427_FreshStart")]
     partial class FreshStart
     {
         /// <inheritdoc />
@@ -166,6 +166,37 @@ namespace DataAccess.Migrations
                         .HasName("pk_manufacturer");
 
                     b.ToTable("manufacturer", (string)null);
+                });
+
+            modelBuilder.Entity("Infrastructure.Models.ShoppingCart", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("id");
+
+                    b.Property<string>("ApplicationUserId")
+                        .HasColumnType("varchar(255)")
+                        .HasColumnName("application_user_id");
+
+                    b.Property<int>("Count")
+                        .HasColumnType("int")
+                        .HasColumnName("count");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int")
+                        .HasColumnName("product_id");
+
+                    b.HasKey("Id")
+                        .HasName("pk_shopping_cart");
+
+                    b.HasIndex("ApplicationUserId")
+                        .HasDatabaseName("ix_shopping_cart_application_user_id");
+
+                    b.HasIndex("ProductId")
+                        .HasDatabaseName("ix_shopping_cart_product_id");
+
+                    b.ToTable("shopping_cart", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -393,6 +424,25 @@ namespace DataAccess.Migrations
                         .HasDatabaseName("ix_product_manufacturer_id");
 
                     b.ToTable("product", (string)null);
+                });
+
+            modelBuilder.Entity("Infrastructure.Models.ShoppingCart", b =>
+                {
+                    b.HasOne("Infrastructure.Models.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("ApplicationUserId")
+                        .HasConstraintName("fk_shopping_cart_application_user_application_user_id");
+
+                    b.HasOne("Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_shopping_cart_product_product_id");
+
+                    b.Navigation("ApplicationUser");
+
+                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

@@ -280,6 +280,34 @@ namespace DataAccess.Migrations
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
+            migrationBuilder.CreateTable(
+                name: "shopping_cart",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    product_id = table.Column<int>(type: "int", nullable: false),
+                    count = table.Column<int>(type: "int", nullable: false),
+                    application_user_id = table.Column<string>(type: "varchar(255)", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_shopping_cart", x => x.id);
+                    table.ForeignKey(
+                        name: "fk_shopping_cart_application_user_application_user_id",
+                        column: x => x.application_user_id,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "id");
+                    table.ForeignKey(
+                        name: "fk_shopping_cart_product_product_id",
+                        column: x => x.product_id,
+                        principalTable: "product",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
             migrationBuilder.CreateIndex(
                 name: "ix_asp_net_role_claims_role_id",
                 table: "AspNetRoleClaims",
@@ -326,6 +354,16 @@ namespace DataAccess.Migrations
                 name: "ix_product_manufacturer_id",
                 table: "product",
                 column: "manufacturer_id");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_shopping_cart_application_user_id",
+                table: "shopping_cart",
+                column: "application_user_id");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_shopping_cart_product_id",
+                table: "shopping_cart",
+                column: "product_id");
         }
 
         /// <inheritdoc />
@@ -347,13 +385,16 @@ namespace DataAccess.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "product");
+                name: "shopping_cart");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "product");
 
             migrationBuilder.DropTable(
                 name: "category");
